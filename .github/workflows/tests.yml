@@ -17,12 +17,9 @@ jobs:
       postgres:
         image: postgres:17
         env:
-          DB_CONNECTION: pgsql
-          DB_HOST: 127.0.0.1
-          DB_PORT: 5432
-          DB_DATABASE: barberz_test
-          DB_USERNAME: barberz_admin
-          DB_PASSWORD: secret
+          POSTGRES_DB: barberz_test
+          POSTGRES_USER: barberz_admin
+          POSTGRES_PASSWORD: secret
         ports:
           - 5432:5432
         options: >-
