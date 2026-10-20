@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
 
     services:
-      pgsql:
+      postgres:
         image: postgres:17
         env:
           DB_CONNECTION: pgsql
