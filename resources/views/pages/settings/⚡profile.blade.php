@@ -12,7 +12,8 @@ use Livewire\Component;
 new #[Title('Profile settings')] class extends Component {
     use ProfileValidationRules;
 
-    public string $name = '';
+    public string $first_name = '';
+    public string $surname = '';
     public string $email = '';
 
     /**
@@ -20,8 +21,11 @@ new #[Title('Profile settings')] class extends Component {
      */
     public function mount(): void
     {
-        $this->name = Auth::user()->name;
-        $this->email = Auth::user()->email;
+        $user = Auth::user();
+
+        $this->first_name = $user->first_name;
+        $this->surname = $user->surname;
+        $this->email = $user->email;
     }
 
     /**
@@ -83,7 +87,9 @@ new #[Title('Profile settings')] class extends Component {
 
     <x-pages::settings.layout :heading="__('Profile')" :subheading="__('Update your name and email address')">
         <form wire:submit="updateProfileInformation" class="my-6 w-full space-y-6">
-            <flux:input wire:model="name" :label="__('Name')" type="text" required autofocus autocomplete="name" />
+            <flux:input wire:model="first_name" :label="__('First name')" type="text" required autofocus autocomplete="first_name" />
+
+            <flux:input wire:model="surname" :label="__('Surname')" type="text" required autofocus autocomplete="surname" />
 
             <div>
                 <flux:input wire:model="email" :label="__('Email')" type="email" required autocomplete="email" />
