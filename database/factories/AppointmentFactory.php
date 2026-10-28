@@ -1,0 +1,36 @@
+<?php
+
+namespace Database\Factories;
+
+use App\Enums\AppointmentStatus;
+use App\Enums\Role;
+use App\Models\BarberService;
+use App\Models\Model;
+use App\Models\User;
+use Illuminate\Database\Eloquent\Factories\Factory;
+
+/**
+ * @extends Factory<Model>
+ */
+class AppointmentFactory extends Factory
+{
+    /**
+     * Define the model's default state.
+     *
+     * @return array<string, mixed>
+     */
+    public function definition(): array
+    {
+        $barberService = BarberService::inRandomOrder()->first();
+
+        return [
+            'barber_id' => $barberService->barber_id,
+            'customer_id' => User::where('role', Role::Customer)->inRandomOrder()->first()->id,
+            'service_id' => $barberService->service_id,
+            'duration_minutes' => $barberService->duration_minutes,
+            'price' => $barberService->price,
+            'date' => fake()->dateTimeBetween('+1 days', '+14 days'),
+            'status' => AppointmentStatus::Confirmed,
+        ];
+    }
+}

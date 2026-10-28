@@ -19,8 +19,10 @@ return new class extends Migration
             $table->foreignId('service_id')->constrained('services')->cascadeOnDelete();
             $table->integer('duration_minutes');
             $table->integer('price');
-            $table->date('date');
+            $table->dateTimeTz('date');
             $table->string('status')->default(AppointmentStatus::Confirmed->value);
+
+            $table->unique(['barber_id', 'customer_id', 'service_id']);
         });
     }
 

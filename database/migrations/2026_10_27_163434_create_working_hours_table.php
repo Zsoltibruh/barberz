@@ -17,6 +17,8 @@ return new class extends Migration
             $table->string('weekday');
             $table->time('start_time');
             $table->time('end_time');
+
+            $table->unique(['user_id', 'weekday']);
         });
     }
 

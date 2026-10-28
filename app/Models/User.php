@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Enums\Role;
+use App\Enums\UserStatus;
 use Database\Factories\UserFactory;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
@@ -34,7 +36,7 @@ class User extends Authenticatable implements MustVerifyEmail
     /** @use HasFactory<UserFactory> */
     use HasFactory, Notifiable, TwoFactorAuthenticatable;
 
-    /**
+    /**'barber_id', 'service_id',
      * Get the attributes that should be cast.
      *
      * @return array<string, string>
@@ -44,6 +46,8 @@ class User extends Authenticatable implements MustVerifyEmail
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'status' => UserStatus::class,
+            'role' => Role::class,
         ];
     }
 
@@ -72,5 +76,25 @@ class User extends Authenticatable implements MustVerifyEmail
     protected function name(): Attribute
     {
         return Attribute::get(fn () => $this->surname.' '.$this->first_name);
+    }
+
+    public function workingHours()
+    {
+        return $this->hasMany(WorkingHour::class, 'barber_id');
+    }
+
+    public function barberAppointments()
+    {
+        return $this->hasMany(Appointment::class, 'barber_id');
+    }
+
+    public function customerAppointments()
+    {
+        return $this->hasMany(Appointment::class, 'customer_id');
+    }
+
+    public function barberServices()
+    {
+        return $this->belongsToMany(Service::class, 'barber_service', 'barber_id', 'service_id');
     }
 }
