@@ -10,6 +10,8 @@ use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Hidden;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Carbon;
@@ -78,22 +80,34 @@ class User extends Authenticatable implements MustVerifyEmail
         return Attribute::get(fn () => $this->surname.' '.$this->first_name);
     }
 
-    public function workingHours()
+    /**
+     * @return HasMany<WorkingHour, $this>
+     */
+    public function workingHours(): HasMany
     {
         return $this->hasMany(WorkingHour::class, 'barber_id');
     }
 
-    public function barberAppointments()
+    /**
+     * @return HasMany<Appointment, $this>
+     */
+    public function barberAppointments(): HasMany
     {
         return $this->hasMany(Appointment::class, 'barber_id');
     }
 
-    public function customerAppointments()
+    /**
+     * @return HasMany<Appointment, $this>
+     */
+    public function customerAppointments(): HasMany
     {
         return $this->hasMany(Appointment::class, 'customer_id');
     }
 
-    public function barberServices()
+    /**
+     * @return BelongsToMany<Service, $this>
+     */
+    public function barberServices(): BelongsToMany
     {
         return $this->belongsToMany(Service::class, 'barber_service', 'barber_id', 'service_id');
     }
