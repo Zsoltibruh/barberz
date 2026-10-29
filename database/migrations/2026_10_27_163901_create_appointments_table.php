@@ -21,8 +21,6 @@ return new class extends Migration
             $table->integer('price');
             $table->dateTimeTz('date');
             $table->string('status')->default(AppointmentStatus::Confirmed->value);
-
-            $table->unique(['barber_id', 'customer_id', 'service_id']);
         });
     }
 

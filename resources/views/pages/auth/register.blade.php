@@ -17,7 +17,7 @@
 
             <!-- Email Address -->
             <flux:input name="email" :label="__('Email address')" :value="old('email')" type="email" required
-                autocomplete="email" placeholder="email@example.com" />
+                autocomplete="email" :placeholder="__('email@example.com')" />
 
             <!-- Password -->
             <flux:input name="password" :label="__('Password')" type="password" required autocomplete="new-password"

@@ -18,7 +18,7 @@
                 required
                 autofocus
                 autocomplete="email"
-                placeholder="email@example.com"
+                :placeholder="__('email@example.com')"
             />
 
             <!-- Password -->

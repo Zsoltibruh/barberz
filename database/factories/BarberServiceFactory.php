@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Enums\Role;
 use App\Models\BarberService;
 use App\Models\Service;
 use App\Models\User;
@@ -20,7 +21,7 @@ class BarberServiceFactory extends Factory
     public function definition(): array
     {
         return [
-            'barber_id' => User::factory(),
+            'barber_id' => User::factory()->state(['role' => Role::Barber]),
             'service_id' => Service::factory(),
             'duration_minutes' => $this->faker->numberBetween(15, 120),
             'price' => $this->faker->numberBetween(2000, 5000),
