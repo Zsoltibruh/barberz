@@ -19,6 +19,14 @@
                     wire:navigate>
                     {{ __('Dashboard') }}
                 </flux:sidebar.item>
+                <flux:sidebar.item icon="scissors" :href="route('barbers.index')"
+                    :current="request()->routeIs('barbers.index')" wire:navigate>
+                    {{ __('Barbers') }}
+                </flux:sidebar.item>
+                <flux:sidebar.item icon="clock" :href="route('appointments.index')"
+                    :current="request()->routeIs('appointments.index')" wire:navigate>
+                    {{ __('Appointments') }}
+                </flux:sidebar.item>
             </flux:sidebar.group>
         </flux:sidebar.nav>
 

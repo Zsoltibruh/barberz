@@ -46,6 +46,6 @@ class Appointment extends Model
      */
     public function service(): BelongsTo
     {
-        return $this->belongsTo(BarberService::class, 'service_id');
+        return $this->belongsTo(Service::class);
     }
 }
