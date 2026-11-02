@@ -25,7 +25,7 @@ class AppointmentFactory extends Factory
 
         return [
             'barber_id' => $barberService->barber_id,
-            'customer_id' => User::where('role', Role::Customer)->inRandomOrder()->first()->id,
+            'customer_id' => User::role(Role::Customer->value)->inRandomOrder()->first()->id,
             'service_id' => $barberService->service_id,
             'duration_minutes' => $barberService->duration_minutes,
             'price' => $barberService->price,

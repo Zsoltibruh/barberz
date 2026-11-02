@@ -4,6 +4,7 @@ namespace App\Actions\Fortify;
 
 use App\Concerns\PasswordValidationRules;
 use App\Concerns\ProfileValidationRules;
+use App\Enums\Role;
 use App\Models\User;
 use Illuminate\Support\Facades\Validator;
 use Laravel\Fortify\Contracts\CreatesNewUsers;
@@ -26,9 +27,9 @@ class CreateNewUser implements CreatesNewUsers
 
         return User::create([
             'first_name' => $input['first_name'],
-            'surname' => $input['surname'],
+            'last_name' => $input['last_name'],
             'email' => $input['email'],
             'password' => $input['password'],
-        ]);
+        ])->assignRole(Role::Customer->value);
     }
 }

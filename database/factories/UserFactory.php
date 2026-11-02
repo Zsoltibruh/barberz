@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Enums\Role;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
@@ -26,7 +27,7 @@ class UserFactory extends Factory
     {
         return [
             'first_name' => fake()->firstName(),
-            'surname' => fake()->lastName(),
+            'last_name' => fake()->lastName(),
             'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),
             'password' => static::$password ??= Hash::make('password'),
@@ -57,5 +58,26 @@ class UserFactory extends Factory
             'two_factor_recovery_codes' => encrypt(json_encode(['recovery-code-1'])),
             'two_factor_confirmed_at' => now(),
         ]);
+    }
+
+    public function barber(): static
+    {
+        return $this->afterCreating(function (User $user) {
+            $user->assignRole(Role::Barber->value);
+        });
+    }
+
+    public function customer(): static
+    {
+        return $this->afterCreating(function (User $user) {
+            $user->assignRole(Role::Customer->value);
+        });
+    }
+
+    public function admin(): static
+    {
+        return $this->afterCreating(function (User $user) {
+            $user->assignRole(Role::Admin->value);
+        });
     }
 }

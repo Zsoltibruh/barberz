@@ -15,26 +15,26 @@ class UserSeeder extends Seeder
     {
         User::factory()->create([
             'first_name' => 'János',
-            'surname' => 'Fodrász',
+            'last_name' => 'Fodrász',
             'email' => 'barber@example.com',
-            'role' => Role::Barber,
-        ]);
+        ])->assignRole(Role::Barber->value);
 
         User::factory()->create([
             'first_name' => 'Jóska',
-            'surname' => 'Admin',
+            'last_name' => 'Admin',
             'email' => 'admin@example.com',
-            'role' => Role::Admin,
-        ]);
+        ])->assignRole(Role::Admin->value);
 
         User::factory()->create([
             'first_name' => 'Elek',
-            'surname' => 'Teszt',
+            'last_name' => 'Teszt',
             'email' => 'test@example.com',
-        ]);
+        ])->assignRole(Role::Customer->value);
 
         User::factory(4)
-            ->state(['role' => Role::Barber])
-            ->create();
+            ->create()
+            ->each(function ($user) {
+                $user->assignRole(Role::Barber->value);
+            });
     }
 }

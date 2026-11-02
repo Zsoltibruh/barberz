@@ -15,7 +15,7 @@ class AppointmentSeeder extends Seeder
      */
     public function run(): void
     {
-        $customers = User::where('role', Role::Customer)->get();
+        $customers = User::role(Role::Customer->value)->get();
         $barberServices = BarberService::all();
 
         Appointment::factory(10)

@@ -13,7 +13,7 @@ new #[Title('Profile settings')] class extends Component {
     use ProfileValidationRules;
 
     public string $first_name = '';
-    public string $surname = '';
+    public string $last_name = '';
     public string $email = '';
 
     /**
@@ -24,7 +24,7 @@ new #[Title('Profile settings')] class extends Component {
         $user = Auth::user();
 
         $this->first_name = $user->first_name;
-        $this->surname = $user->surname;
+        $this->last_name = $user->last_name;
         $this->email = $user->email;
     }
 
@@ -89,7 +89,7 @@ new #[Title('Profile settings')] class extends Component {
         <form wire:submit="updateProfileInformation" class="my-6 w-full space-y-6">
             <flux:input wire:model="first_name" :label="__('First name')" type="text" required autofocus autocomplete="first_name" />
 
-            <flux:input wire:model="surname" :label="__('Surname')" type="text" required autofocus autocomplete="surname" />
+            <flux:input wire:model="last_name" :label="__('Last name')" type="text" required autofocus autocomplete="last_name" />
 
             <div>
                 <flux:input wire:model="email" :label="__('Email')" type="email" required autocomplete="email" />

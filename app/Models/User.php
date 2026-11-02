@@ -17,6 +17,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Str;
 use Laravel\Fortify\TwoFactorAuthenticatable;
+use Spatie\Permission\Traits\HasRoles;
 
 /**
  * @property int $id
@@ -31,12 +32,12 @@ use Laravel\Fortify\TwoFactorAuthenticatable;
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  */
-#[Fillable(['first_name', 'surname', 'email', 'password'])]
+#[Fillable(['first_name', 'last_name', 'email', 'password'])]
 #[Hidden(['password', 'two_factor_secret', 'two_factor_recovery_codes', 'remember_token'])]
 class User extends Authenticatable implements MustVerifyEmail
 {
     /** @use HasFactory<UserFactory> */
-    use HasFactory, Notifiable, TwoFactorAuthenticatable;
+    use HasFactory, HasRoles, Notifiable, TwoFactorAuthenticatable;
 
     /**'barber_id', 'service_id',
      * Get the attributes that should be cast.
@@ -67,17 +68,17 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function getFullName(): string
     {
-        return $this->first_name.' '.$this->surname;
+        return $this->first_name.' '.$this->last_name;
     }
 
     /**
-     * Full name in Hungarian format (Surname Firstname)
+     * Full name in Hungarian format (Last name First name)
      *
      * @return Attribute<non-falsy-string, never>
      */
     protected function name(): Attribute
     {
-        return Attribute::get(fn () => $this->surname.' '.$this->first_name);
+        return Attribute::get(fn () => $this->last_name.' '.$this->first_name);
     }
 
     /**
