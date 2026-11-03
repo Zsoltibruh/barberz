@@ -18,6 +18,8 @@ new class extends Component {
 ?>
 
 <section class="w-full flex flex-col gap-2">
+    <h1 class="text-3xl font-bold"> {{ __('Appointments') }} </h1>
+
     @foreach ($this->appointments as $appointment)
         <flux:card>
             <flux:heading size="lg"> {{ $appointment->date }} </flux:heading>
@@ -25,7 +27,7 @@ new class extends Component {
             <flux:card.body>
                 <flux:card.heading> {{ $appointment->barber->name }} </flux:card.heading>
                 <flux:card.subheading>
-                    {{ $appointment->service->name }} - {{ $appointment->price }} Ft
+                    {{ $appointment->service->name }} - {{ $appointment->service->price }} Ft
                 </flux:card.subheading>
                 <flux:card.subheading>
                     {{ $appointment->status->label() }}

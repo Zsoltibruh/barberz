@@ -9,9 +9,7 @@ new class extends Component {
     #[Computed]
     public function barbers()
     {
-        return User::role(Role::Barber)
-        ->orderBy('last_name', 'asc')
-        ->get();
+        return User::role(Role::Barber)->orderBy('last_name', 'asc')->get();
     }
 };
 ?>
@@ -38,7 +36,8 @@ new class extends Component {
                     <flux:card.subheading> {{ $barber->status->label() }} </flux:card.subheading>
                     <flux:card.subheading> {{ __('Services') }}: haircuts, beard trimming </flux:card.subheading>
                     <flux:card.actions>
-                        <flux:button variant="primary" color="blue">
+                        <flux:button variant="primary" color="blue"
+                            :href="route('appointments.create', ['barber' => $barber])" wire:navigate>
                             {{ __('Book appointment') }}
                         </flux:button>
                     </flux:card.actions>

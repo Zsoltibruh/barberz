@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-#[Fillable(['date'])]
+#[Fillable(['barber_id', 'customer_id', 'service_id', 'date', 'status'])]
 #[WithoutTimestamps]
 class Appointment extends Model
 {
