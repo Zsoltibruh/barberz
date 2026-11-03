@@ -23,6 +23,11 @@ class RolesAndPermissionsSeeder extends Seeder
             'create users',
             'update users',
             'delete users',
+            'create services',
+            'edit services',
+            'delete services',
+            'view appointments',
+            // Owner permissions - TODO: More permissions like: view analytics, manage money, etc.
             'manage barbershop',
             // Barber permissions
             'set working hours',
@@ -31,6 +36,7 @@ class RolesAndPermissionsSeeder extends Seeder
             'update own appointments',
             'delete own appointments',
             // Customer permissions
+            'view services',
             'create appointments',
         ];
 
@@ -47,9 +53,14 @@ class RolesAndPermissionsSeeder extends Seeder
 
         $admin->givePermissionTo([
             'view users',
+            'view services',
             'create users',
             'update users',
             'delete users',
+            'create services',
+            'edit services',
+            'delete services',
+            'view appointments',
         ]);
 
         $barber->givePermissionTo([
@@ -64,6 +75,7 @@ class RolesAndPermissionsSeeder extends Seeder
             'create appointments',
             'update own appointments',
             'delete own appointments',
+            'view services',
         ]);
     }
 }
