@@ -4,6 +4,7 @@ use App\Enums\AppointmentStatus;
 use App\Enums\Role;
 use App\Models\Appointment;
 use App\Models\User;
+use Illuminate\Validation\Rule;
 use Livewire\Component;
 
 new class extends Component {
@@ -15,7 +16,7 @@ new class extends Component {
     protected function rules(): array
     {
         return [
-            'serviceId' => ['required', 'exists:services,id'],
+            'serviceId' => ['required', 'exists:services,id', Rule::in($this->barber->barberServices()->pluck('services.id')->all())],
             'date' => ['required', 'date', 'after_or_equal:now'],
         ];
     }
@@ -25,6 +26,7 @@ new class extends Component {
         return [
             'serviceId.required' => __('Please select a service'),
             'serviceId.exists' => __('Please select a valid service'),
+            'serviceId.in' => __('Please select a valid service'),
             'date.required' => __('Please select a date and time'),
             'date.date' => __('Please select a valid date and time'),
         ];
