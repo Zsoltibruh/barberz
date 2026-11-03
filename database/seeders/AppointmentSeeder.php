@@ -4,7 +4,6 @@ namespace Database\Seeders;
 
 use App\Enums\Role;
 use App\Models\Appointment;
-use App\Models\BarberService;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
@@ -16,20 +15,22 @@ class AppointmentSeeder extends Seeder
     public function run(): void
     {
         $customers = User::role(Role::Customer->value)->get();
-        $barberServices = BarberService::all();
+        $barbers = User::role(Role::Barber->value)->get();
 
         Appointment::factory(10)
             ->recycle($customers)
-            ->state(function () use ($barberServices) {
-                $barberService = $barberServices->random();
+            ->recycle($barbers)
+            // ->state(function () use ($barbers) {
+            //     $barber = $barbers->random();
+            //     $service = $barber->barberServices->random();
 
-                return [
-                    'barber_id' => $barberService->barber_id,
-                    'service_id' => $barberService->service_id,
-                    'duration_minutes' => $barberService->duration_minutes,
-                    'price' => $barberService->price,
-                ];
-            })
+            //     return [
+            //         'barber_id' => $barber->id,
+            //         'service_id' => $service->id,
+            //         'duration_minutes' => $service->duration_minutes,
+            //         'price' => $service->price,
+            //     ];
+            // })
             ->create();
     }
 }

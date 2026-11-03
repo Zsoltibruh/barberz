@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Enums\Role;
 use App\Enums\UserStatus;
 use Database\Factories\UserFactory;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -50,7 +49,6 @@ class User extends Authenticatable implements MustVerifyEmail
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
             'status' => UserStatus::class,
-            'role' => Role::class,
         ];
     }
 
@@ -64,11 +62,6 @@ class User extends Authenticatable implements MustVerifyEmail
         return Str::length($initials) > 1
             ? Str::substr($initials, 0, 1).Str::substr($initials, -1)
             : $initials;
-    }
-
-    public function getFullName(): string
-    {
-        return $this->first_name.' '.$this->last_name;
     }
 
     /**

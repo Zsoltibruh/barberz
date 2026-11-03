@@ -24,11 +24,11 @@ class Service extends Model
     }
 
     /**
-     * @return HasMany<BarberService, $this>
+     * @return HasMany<User, $this>
      */
-    public function barberServices(): HasMany
+    public function barber(): HasMany
     {
-        return $this->hasMany(BarberService::class);
+        return $this->hasMany(User::class, 'barber_id');
     }
 
     /**

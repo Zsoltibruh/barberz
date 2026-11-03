@@ -5,7 +5,6 @@ namespace Database\Factories;
 use App\Enums\AppointmentStatus;
 use App\Enums\Role;
 use App\Models\Appointment;
-use App\Models\BarberService;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -21,14 +20,15 @@ class AppointmentFactory extends Factory
      */
     public function definition(): array
     {
-        $barberService = BarberService::inRandomOrder()->first();
+        $barberService = User::role(Role::Barber->value)
+            ->with('barberServices')
+            ->inRandomOrder()
+            ->first();
 
         return [
-            'barber_id' => $barberService->barber_id,
+            'barber_id' => $barberService->id,
             'customer_id' => User::role(Role::Customer->value)->inRandomOrder()->first()->id,
-            'service_id' => $barberService->service_id,
-            'duration_minutes' => $barberService->duration_minutes,
-            'price' => $barberService->price,
+            'service_id' => $barberService->barberServices->first()->id,
             'date' => fake()->dateTimeBetween('+1 days', '+14 days'),
             'status' => AppointmentStatus::Confirmed,
         ];

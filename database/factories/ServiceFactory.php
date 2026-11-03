@@ -19,6 +19,9 @@ class ServiceFactory extends Factory
     {
         return [
             'name' => fake()->word(),
+            'duration_minutes' => fake()->numberBetween(15, 120),
+            'price' => fake()->numberBetween(2000, 5000),
+            'currency' => 'HUF',
         ];
     }
 }

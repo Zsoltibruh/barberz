@@ -42,7 +42,7 @@ class Appointment extends Model
     }
 
     /**
-     * @return BelongsTo<BarberService, $this>
+     * @return BelongsTo<Service, $this>
      */
     public function service(): BelongsTo
     {
