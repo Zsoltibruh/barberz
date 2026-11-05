@@ -13,12 +13,12 @@ return new class extends Migration
     {
         Schema::create('working_hours', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
+            $table->foreignId('barber_id')->constrained('users')->cascadeOnDelete();
             $table->string('weekday');
             $table->time('start_time');
             $table->time('end_time');
 
-            $table->unique(['user_id', 'weekday']);
+            $table->unique(['barber_id', 'weekday']);
         });
     }
 
