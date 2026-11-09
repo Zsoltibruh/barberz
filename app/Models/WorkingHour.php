@@ -16,15 +16,6 @@ class WorkingHour extends Model
     /** @use HasFactory<WorkingHourFactory>  */
     use HasFactory;
 
-    public function casts(): array
-    {
-        return [
-            'weekday' => 'string',
-            'start_time' => 'datetime',
-            'end_time' => 'datetime',
-        ];
-    }
-
     /**
      * @return BelongsTo<User, $this>
      */

@@ -13,7 +13,7 @@ test('guests are redirected to the login page', function () {
     $response->assertRedirect(route('login'));
 });
 
-test('authenticated users can visit the barbers index pages', function () {
+test('authenticated users can visit the barbers index page', function () {
     $user = User::factory()->create()->assignRole(Role::Customer);
     $this->actingAs($user);
 
