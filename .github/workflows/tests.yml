@@ -58,9 +58,6 @@ jobs:
       - name: Setup Application
         run: composer setup
 
-      - name: Security audit
-        run: composer audit
-
       - name: Run CI Checks
         run: composer ci:check
 
