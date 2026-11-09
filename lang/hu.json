@@ -44,7 +44,7 @@
     "Please select a service": "Kérlek válassz szolgáltatást",
     "Please select a time": "Kérlek válassz időt",
     "Please select a valid time": "Kérlek válassz érvényes időt",
-    "Please select a time at least :hours before :now": "Kérlek válassz egy időt legalább :hours órával :now előtt",
+    "Please select a time at least :hours before :now": "Kérlek válassz egy időt legalább :hours órával :now után",
     "Please select a valid service": "Kérlek válassz érvényes szolgáltatást",
     "Please select a valid date": "Kérlek válassz érvényes dátumot",
     "Please select a date within the barber's working hours": "Kérlek válassz olyan időt amikor a fodrász dolgozik.",
