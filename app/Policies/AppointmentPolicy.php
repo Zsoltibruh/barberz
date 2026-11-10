@@ -28,7 +28,7 @@ class AppointmentPolicy
 
     public function cancel(User $user, Appointment $appointment): bool
     {
-        if ($appointment->status !== AppointmentStatus::Confirmed) {
+        if ($appointment->status !== AppointmentStatus::Confirmed->value) {
             return false;
         }
 
@@ -38,7 +38,7 @@ class AppointmentPolicy
 
     public function reschedule(User $user, Appointment $appointment): bool
     {
-        if ($appointment->status !== AppointmentStatus::Confirmed) {
+        if ($appointment->status !== AppointmentStatus::Confirmed->value) {
             return false;
         }
 
@@ -61,7 +61,7 @@ class AppointmentPolicy
     public function update(User $user, Appointment $appointment): bool
     {
         return $appointment->customer_id === $user->id
-        || $appointment->barber_id = $user->id;
+        || $appointment->barber_id === $user->id;
     }
 
     /**
