@@ -50,7 +50,7 @@ class WithinWorkingHours implements DataAwareRule, ValidationRule
             return;
         }
 
-        $hours = $this->barber->workingHours()
+        $hours = $this->barber->workingHours
             ->where('weekday', strtolower($selected->englishDayOfWeek))
             ->first();
 

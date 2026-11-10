@@ -15,14 +15,17 @@ new class extends Component {
     {
         abort_unless($barber->hasRole(Role::Barber), 404);
 
-        $this->barber = $barber;
+        $this->barber = $barber->load([
+            'workingHours',
+            'barberServices',
+        ]);
         $this->form->setBarber($barber);
     }
 
     #[Computed]
     public function workingHours(): Collection
     {
-        return $this->barber->workingHours()->orderBy('id')->get();
+        return $this->barber->workingHours->sortBy('id')->values();
     }
 
     public function save(): void
