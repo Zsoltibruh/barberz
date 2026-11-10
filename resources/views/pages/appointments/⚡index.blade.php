@@ -58,8 +58,10 @@ new class extends Component {
         <flux:modal name="delete-appointment-{{ $appointment->id }}" class="md:w-96">
             <div class="space-y-6">
                 <div>
-                    <flux:heading size="lg">Cancel appointment</flux:heading>
-                    <flux:text class="mt-2">Are you sure you want to cancel this appointment?</flux:text>
+                    <flux:heading size="lg"> {{ __('Cancel appointment') }} </flux:heading>
+                    <flux:text class="mt-2">
+                        {{ __('Are you sure you want to cancel this appointment?') }}
+                    </flux:text>
                 </div>
 
                 <flux:card>
