@@ -24,7 +24,7 @@ class RolesAndPermissionsSeeder extends Seeder
             'update users',
             'delete users',
             'create services',
-            'edit services',
+            'update services',
             'delete services',
             'view appointments',
             // Owner permissions - TODO: More permissions like: view analytics, manage money, etc.
@@ -33,11 +33,12 @@ class RolesAndPermissionsSeeder extends Seeder
             'set working hours',
             // Shared permissions (barber - customer)
             'view own appointments',
-            'update own appointments',
-            'delete own appointments',
+            'reschedule own appointments',
             // Customer permissions
             'view services',
-            'create appointments',
+            'book appointments',
+            'delete own appointments',
+            'cancel own appointments',
         ];
 
         foreach ($permissions as $permission) {
@@ -53,12 +54,11 @@ class RolesAndPermissionsSeeder extends Seeder
 
         $admin->givePermissionTo([
             'view users',
-            'view services',
             'create users',
             'update users',
             'delete users',
             'create services',
-            'edit services',
+            'update services',
             'delete services',
             'view appointments',
         ]);
@@ -66,16 +66,16 @@ class RolesAndPermissionsSeeder extends Seeder
         $barber->givePermissionTo([
             'set working hours',
             'view own appointments',
-            'update own appointments',
-            'delete own appointments',
+            'reschedule own appointments',
         ]);
 
         $customer->givePermissionTo([
             'view own appointments',
-            'create appointments',
-            'update own appointments',
-            'delete own appointments',
+            'reschedule own appointments',
             'view services',
+            'book appointments',
+            'delete own appointments',
+            'cancel own appointments',
         ]);
     }
 }
