@@ -15,10 +15,7 @@ new class extends Component {
     {
         abort_unless($barber->hasRole(Role::Barber), 404);
 
-        $this->barber = $barber->load([
-            'workingHours',
-            'barberServices',
-        ]);
+        $this->barber = $barber->load(['workingHours', 'barberServices']);
         $this->form->setBarber($barber);
     }
 
