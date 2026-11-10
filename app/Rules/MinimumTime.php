@@ -47,7 +47,7 @@ class MinimumTime implements DataAwareRule, ValidationRule
             return;
         }
 
-        if ($selected->lt(now()->addHours(2))) {
+        if ($selected->lt(now()->addHours(config('booking.minimum_notice_hours')))) {
             $fail(__('Please select a time at least :hours before :now', [
                 'hours' => config('booking.minimum_notice_hours'),
                 'now' => now()->format('H:i'),
