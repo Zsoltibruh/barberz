@@ -3,6 +3,8 @@
 use App\Enums\Role;
 use App\Livewire\Forms\BookAppointmentForm;
 use App\Models\User;
+use Illuminate\Support\Collection;
+use Livewire\Attributes\Computed;
 use Livewire\Component;
 
 new class extends Component {
@@ -15,6 +17,12 @@ new class extends Component {
 
         $this->barber = $barber;
         $this->form->setBarber($barber);
+    }
+
+    #[Computed]
+    public function workingHours(): Collection
+    {
+        return $this->barber->workingHours()->orderBy('id')->get();
     }
 
     public function save(): void
@@ -31,7 +39,7 @@ new class extends Component {
     <h2 class="text-2xl"> {{ __('Working hours') }} </h2>
     <div>
         <ul>
-            @foreach ($this->barber->workingHours as $workingHour)
+            @foreach ($this->workingHours as $workingHour)
                 <li>
                     {{ __($workingHour->weekday) }}:
                     {{ $workingHour->start_time }} - {{ $workingHour->end_time }}
