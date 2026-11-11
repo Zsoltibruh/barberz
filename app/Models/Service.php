@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\WithoutTimestamps;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 #[Fillable(['name', 'duration_minutes', 'price', 'currency'])]
@@ -24,11 +25,11 @@ class Service extends Model
     }
 
     /**
-     * @return HasMany<User, $this>
+     * @return BelongsToMany<User, $this>
      */
-    public function barber(): HasMany
+    public function barbers(): BelongsToMany
     {
-        return $this->hasMany(User::class, 'barber_id');
+        return $this->belongsToMany(User::class, 'barber_service', 'service_id', 'barber_id');
     }
 
     /**
