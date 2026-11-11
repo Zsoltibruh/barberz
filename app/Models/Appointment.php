@@ -13,6 +13,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * @property CarbonImmutable $date
+ * @property AppointmentStatus $status
  */
 #[Fillable(['barber_id', 'customer_id', 'service_id', 'date', 'status'])]
 #[WithoutTimestamps]

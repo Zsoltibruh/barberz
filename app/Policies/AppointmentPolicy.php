@@ -28,7 +28,7 @@ class AppointmentPolicy
 
     public function cancel(User $user, Appointment $appointment): bool
     {
-        if ($appointment->status !== AppointmentStatus::Confirmed->value) {
+        if ($appointment->status !== AppointmentStatus::Confirmed) {
             return false;
         }
 
@@ -38,7 +38,7 @@ class AppointmentPolicy
 
     public function reschedule(User $user, Appointment $appointment): bool
     {
-        if ($appointment->status !== AppointmentStatus::Confirmed->value) {
+        if ($appointment->status !== AppointmentStatus::Confirmed) {
             return false;
         }
 
