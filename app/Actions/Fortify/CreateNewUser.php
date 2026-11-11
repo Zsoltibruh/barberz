@@ -30,6 +30,6 @@ class CreateNewUser implements CreatesNewUsers
             'last_name' => $input['last_name'],
             'email' => $input['email'],
             'password' => $input['password'],
-        ])->assignRole(Role::Customer->value);
+        ])->assignRole(Role::Customer);
     }
 }

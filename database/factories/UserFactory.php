@@ -64,21 +64,21 @@ class UserFactory extends Factory
     public function barber(): static
     {
         return $this->afterCreating(function (User $user) {
-            $user->assignRole(Role::Barber->value);
+            $user->assignRole(Role::Barber);
         });
     }
 
     public function customer(): static
     {
         return $this->afterCreating(function (User $user) {
-            $user->assignRole(Role::Customer->value);
+            $user->assignRole(Role::Customer);
         });
     }
 
     public function admin(): static
     {
         return $this->afterCreating(function (User $user) {
-            $user->assignRole(Role::Admin->value);
+            $user->assignRole(Role::Admin);
         });
     }
 }

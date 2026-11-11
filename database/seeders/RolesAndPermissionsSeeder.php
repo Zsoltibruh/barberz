@@ -45,10 +45,10 @@ class RolesAndPermissionsSeeder extends Seeder
             Permission::create(['name' => $permission]);
         }
 
-        $admin = Role::findOrCreate(EnumsRole::Admin->value);
-        $barber = Role::findOrCreate(EnumsRole::Barber->value);
-        $customer = Role::findOrCreate(EnumsRole::Customer->value);
-        $owner = Role::findOrCreate(EnumsRole::Owner->value);
+        $admin = Role::findOrCreate(EnumsRole::Admin);
+        $barber = Role::findOrCreate(EnumsRole::Barber);
+        $customer = Role::findOrCreate(EnumsRole::Customer);
+        $owner = Role::findOrCreate(EnumsRole::Owner);
 
         $owner->givePermissionTo(Permission::all());
 

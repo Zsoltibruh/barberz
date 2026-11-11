@@ -14,8 +14,8 @@ class AppointmentSeeder extends Seeder
      */
     public function run(): void
     {
-        $customers = User::role(Role::Customer->value)->get();
-        $barbers = User::role(Role::Barber->value)->get();
+        $customers = User::role(Role::Customer)->get();
+        $barbers = User::role(Role::Barber)->get();
 
         Appointment::factory(10)
             ->recycle($customers)

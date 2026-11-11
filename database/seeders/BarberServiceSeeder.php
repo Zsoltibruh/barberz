@@ -16,7 +16,7 @@ class BarberServiceSeeder extends Seeder
     {
         $services = Service::all();
 
-        User::role(Role::Barber->value)->get()->each(function ($barber) use ($services) {
+        User::role(Role::Barber)->get()->each(function ($barber) use ($services) {
             $barber->barberServices()->syncWithoutDetaching(
                 $services->random(rand(1, 3))->pluck('id')->all()
             );
