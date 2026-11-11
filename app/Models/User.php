@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\Role;
 use App\Enums\UserStatus;
 use Database\Factories\UserFactory;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -86,17 +87,11 @@ class User extends Authenticatable implements MustVerifyEmail
     /**
      * @return HasMany<Appointment, $this>
      */
-    public function barberAppointments(): HasMany
+    public function appointments(): HasMany
     {
-        return $this->hasMany(Appointment::class, 'barber_id');
-    }
-
-    /**
-     * @return HasMany<Appointment, $this>
-     */
-    public function customerAppointments(): HasMany
-    {
-        return $this->hasMany(Appointment::class, 'customer_id');
+        return $this->hasRole(Role::Barber)
+        ? $this->hasMany(Appointment::class, 'barber_id')
+        : $this->hasMany(Appointment::class, 'customer_id');
     }
 
     /**
