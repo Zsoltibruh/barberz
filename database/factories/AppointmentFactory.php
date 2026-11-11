@@ -20,15 +20,15 @@ class AppointmentFactory extends Factory
      */
     public function definition(): array
     {
-        $barberService = User::role(Role::Barber)
+        $barber = User::role(Role::Barber)
             ->with('barberServices')
             ->inRandomOrder()
             ->first();
 
         return [
-            'barber_id' => $barberService->id,
+            'barber_id' => $barber->id,
             'customer_id' => User::role(Role::Customer)->inRandomOrder()->first()->id,
-            'service_id' => $barberService->barberServices->first()->id,
+            'service_id' => $barber->barberServices->first()->id,
             'date' => fake()->dateTimeBetween('+1 days', '+14 days'),
             'status' => AppointmentStatus::Confirmed,
         ];
