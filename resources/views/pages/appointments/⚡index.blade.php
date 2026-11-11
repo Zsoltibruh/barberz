@@ -1,8 +1,5 @@
 <?php
 
-use App\Enums\AppointmentStatus;
-use App\Models\Appointment;
-use Flux\Flux;
 use Livewire\Attributes\Computed;
 use Livewire\Component;
 
@@ -12,7 +9,7 @@ new class extends Component {
     {
         return auth()
             ->user()
-            ->customerAppointments()
+            ->appointments()
             ->with(['barber', 'service'])
             ->orderBy('date', 'desc')
             ->get();

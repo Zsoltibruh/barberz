@@ -29,7 +29,6 @@ beforeEach(function () {
 test('customers can cancel their appointments', function () {
     Livewire::actingAs($this->customer)
         ->test('appointments.card', ['appointment' => $this->appointment])
-        ->assertSee(__('Cancel appointment'))
         ->call('cancel')
         ->assertHasNoErrors();
 
@@ -43,7 +42,6 @@ test('customers can\'t cancel an already cancelled appointments', function () {
 
     Livewire::actingAs($this->customer)
         ->test('appointments.card', ['appointment' => $this->appointment])
-        ->assertSee(__('Cancel appointment'))
         ->call('cancel')
         ->assertHasNoErrors();
 
@@ -55,7 +53,6 @@ test('customers can only cancel their own appointments', function () {
 
     Livewire::actingAs($this->customer)
         ->test('appointments.card', ['appointment' => $otherAppointment])
-        ->assertSee(__('Cancel appointment'))
         ->call('cancel')
         ->assertForbidden();
 });
@@ -63,7 +60,6 @@ test('customers can only cancel their own appointments', function () {
 test('barbers can\'t cancel their appointments', function () {
     Livewire::actingAs($this->barber)
         ->test('appointments.card', ['appointment' => $this->appointment])
-        ->assertSee(__('Cancel appointment'))
         ->call('cancel')
         ->assertForbidden();
 

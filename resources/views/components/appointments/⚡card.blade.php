@@ -17,6 +17,8 @@ new class extends Component {
 
     public function cancel(): void
     {
+        $this->authorize('cancel', $this->appointment);
+
         $this->appointment->update(['status' => AppointmentStatus::Cancelled]);
 
         Flux::modal("cancel-appointment-{$this->appointment->id}")->close();
@@ -24,6 +26,8 @@ new class extends Component {
 
     public function reschedule(): void
     {
+        $this->authorize('reschedule', $this->appointment);
+
         $this->form->reschedule();
 
         Flux::modal("reschedule-appointment-{$this->appointment->id}")->close();
@@ -45,57 +49,61 @@ new class extends Component {
         @endcan
     </x-appointment-summary>
 
-    <flux:modal name="cancel-appointment-{{ $appointment->id }}" class="md:w-96">
-        <div class="space-y-6">
-            <div>
-                <flux:heading size="lg"> {{ __('Cancel appointment') }} </flux:heading>
-                <flux:text class="mt-2">
-                    {{ __('Are you sure you want to cancel this appointment?') }}
-                </flux:text>
-            </div>
+    @can('cancel', $appointment)
+        <flux:modal name="cancel-appointment-{{ $appointment->id }}" class="md:w-96">
+            <div class="space-y-6">
+                <div>
+                    <flux:heading size="lg"> {{ __('Cancel appointment') }} </flux:heading>
+                    <flux:text class="mt-2">
+                        {{ __('Are you sure you want to cancel this appointment?') }}
+                    </flux:text>
+                </div>
 
-            <flux:card>
-                <flux:heading size="lg"> {{ $appointment->date }} </flux:heading>
+                <flux:card>
+                    <flux:heading size="lg"> {{ $appointment->date }} </flux:heading>
 
-                <flux:card.body>
-                    <flux:card.heading> {{ $appointment->barber->name }} </flux:card.heading>
-                    <flux:card.subheading>
-                        {{ $appointment->service->name }} - {{ $appointment->service->price }} Ft
-                    </flux:card.subheading>
-                    <flux:card.subheading>
-                        {{ $appointment->status->label() }}
-                    </flux:card.subheading>
-                </flux:card.body>
-            </flux:card>
+                    <flux:card.body>
+                        <flux:card.heading> {{ $appointment->barber->name }} </flux:card.heading>
+                        <flux:card.subheading>
+                            {{ $appointment->service->name }} - {{ $appointment->service->price }} Ft
+                        </flux:card.subheading>
+                        <flux:card.subheading>
+                            {{ $appointment->status->label() }}
+                        </flux:card.subheading>
+                    </flux:card.body>
+                </flux:card>
 
-            <div class="flex">
-                <flux:spacer />
+                <div class="flex">
+                    <flux:spacer />
 
-                <div class="flex justify-end space-x-2 rtl:space-x-reverse">
-                    <flux:modal.close>
-                        <flux:button variant="ghost"> {{ __('Cancel') }} </flux:button>
-                    </flux:modal.close>
-                    <flux:button variant="danger" wire:click="cancel">
-                        {{ __('Cancel appointment') }}
-                    </flux:button>
+                    <div class="flex justify-end space-x-2 rtl:space-x-reverse">
+                        <flux:modal.close>
+                            <flux:button variant="ghost"> {{ __('Cancel') }} </flux:button>
+                        </flux:modal.close>
+                        <flux:button variant="danger" wire:click="cancel">
+                            {{ __('Cancel appointment') }}
+                        </flux:button>
+                    </div>
                 </div>
             </div>
-        </div>
-    </flux:modal>
+        </flux:modal>
+    @endcan
 
-    <flux:modal name="reschedule-appointment-{{ $appointment->id }}" class="md:w-96">
-        <form wire:submit="reschedule" class="space-y-6">
-            <flux:heading size="lg">{{ __('Modify appointment') }}</flux:heading>
+    @can('reschedule', $appointment)
+        <flux:modal name="reschedule-appointment-{{ $appointment->id }}" class="md:w-96">
+            <form wire:submit="reschedule" class="space-y-6">
+                <flux:heading size="lg">{{ __('Modify appointment') }}</flux:heading>
 
-            <flux:input wire:model="form.date" type="date" :min="now()->format('Y-m-d')" :label="__('Date')" />
-            <flux:input wire:model="form.time" type="time" step="900" :label="__('Time')" />
+                <flux:input wire:model="form.date" type="date" :min="now()->format('Y-m-d')" :label="__('Date')" />
+                <flux:input wire:model="form.time" type="time" step="900" :label="__('Time')" />
 
-            <div class="flex justify-end gap-2">
-                <flux:modal.close>
-                    <flux:button>{{ __('Cancel') }}</flux:button>
-                </flux:modal.close>
-                <flux:button type="submit" variant="primary">{{ __('Save') }}</flux:button>
-            </div>
-        </form>
-    </flux:modal>
+                <div class="flex justify-end gap-2">
+                    <flux:modal.close>
+                        <flux:button>{{ __('Cancel') }}</flux:button>
+                    </flux:modal.close>
+                    <flux:button type="submit" variant="primary">{{ __('Save') }}</flux:button>
+                </div>
+            </form>
+        </flux:modal>
+    @endcan
 </div>

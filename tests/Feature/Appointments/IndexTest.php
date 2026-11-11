@@ -48,7 +48,7 @@ test('customers can see their appointments', function () {
 test('customers can only see their own appointments', function () {
     // Other customer with 5 appointments
     $stranger = User::factory()
-        ->has(Appointment::factory()->count(5), 'customerAppointments')
+        ->has(Appointment::factory()->count(5))
         ->create()
         ->assignRole(Role::Customer);
 
@@ -72,10 +72,15 @@ test('customers can\'t see the modify and cancel button of a cancelled appointme
 });
 
 test('barbers can only see their own appointments', function () {
+    // Other barber with 5 appointments
     $stranger = User::factory()
-        ->has(Appointment::factory()->count(5), 'barberAppointments')
         ->create()
         ->assignRole(Role::Barber);
+
+    Appointment::factory()
+        ->count(5)
+        ->for($stranger, 'barber')
+        ->create();
 
     $component = Livewire::actingAs($this->barber)->test('pages::appointments.index');
     $strangerComponent = Livewire::actingAs($stranger)->test('pages::appointments.index');
