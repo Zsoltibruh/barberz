@@ -17,20 +17,23 @@ class AppointmentSeeder extends Seeder
         $customers = User::role(Role::Customer)->get();
         $barbers = User::role(Role::Barber)->get();
 
+        Appointment::factory(5)
+            ->state([
+                'barber_id' => User::find(1)->id,
+            ])
+            ->recycle($customers)
+            ->create();
+
+        Appointment::factory(5)
+            ->state([
+                'customer_id' => User::find(3)->id,
+            ])
+            ->recycle($barbers)
+            ->create();
+
         Appointment::factory(10)
             ->recycle($customers)
             ->recycle($barbers)
-            // ->state(function () use ($barbers) {
-            //     $barber = $barbers->random();
-            //     $service = $barber->barberServices->random();
-
-            //     return [
-            //         'barber_id' => $barber->id,
-            //         'service_id' => $service->id,
-            //         'duration_minutes' => $service->duration_minutes,
-            //         'price' => $service->price,
-            //     ];
-            // })
             ->create();
     }
 }
