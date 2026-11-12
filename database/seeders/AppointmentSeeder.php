@@ -21,7 +21,7 @@ class AppointmentSeeder extends Seeder
 
         // Appointments for the test barber
         Appointment::factory(5)
-            ->state([
+            ->state(fn () => [
                 'barber_id' => User::find(1)->id,
                 'customer_id' => $customers->random()->id,
             ])
@@ -30,7 +30,7 @@ class AppointmentSeeder extends Seeder
 
         // Appointments for the test customer
         Appointment::factory(5)
-            ->state([
+            ->state(fn () => [
                 'barber_id' => $barbers->random()->id,
                 'customer_id' => User::find(3)->id,
             ])
@@ -38,7 +38,7 @@ class AppointmentSeeder extends Seeder
             ->create();
 
         Appointment::factory(10)
-            ->state([
+            ->state(fn () => [
                 'barber_id' => $barbers->random()->id,
                 'customer_id' => $customers->random()->id,
             ])
