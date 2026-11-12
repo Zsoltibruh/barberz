@@ -60,7 +60,7 @@ new class extends Component {
 
     <x:search target="barbers">
         <flux:select wire:model.live="service" :placeholder="__('Choose service...')">
-            <flux:select.option value="">{{ __('All services') }}</flux:select.option>
+            <flux:select.option value="">{{ __('Any service') }}</flux:select.option>
             @foreach ($this->services as $service)
                 <flux:select.option> {{ $service->name }} </flux:select.option>
             @endforeach
