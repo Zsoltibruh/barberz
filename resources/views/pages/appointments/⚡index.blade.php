@@ -10,7 +10,7 @@ new class extends Component {
         return auth()
             ->user()
             ->appointments()
-            ->with(['barber', 'service'])
+            ->with(['barber', 'customer', 'service'])
             ->orderBy('date', 'desc')
             ->get();
     }
