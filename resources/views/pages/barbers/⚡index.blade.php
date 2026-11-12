@@ -9,7 +9,7 @@ new class extends Component {
     #[Computed]
     public function barbers()
     {
-        return User::role(Role::Barber)->orderBy('last_name', 'asc')->get();
+        return User::role(Role::Barber)->orderBy('last_name', 'asc')->paginate(config('app.pagination'));
     }
 };
 ?>
@@ -27,4 +27,6 @@ new class extends Component {
             <x:barber-summary :barber="$barber" />
         @endforeach
     </div>
+
+    {{ $this->barbers->links() }}
 </section>

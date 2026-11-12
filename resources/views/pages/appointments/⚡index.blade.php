@@ -12,7 +12,7 @@ new class extends Component {
             ->appointments()
             ->with(['barber', 'customer', 'service'])
             ->orderBy('date', 'desc')
-            ->get();
+            ->paginate(config('app.pagination'));
     }
 };
 ?>
@@ -23,4 +23,6 @@ new class extends Component {
     @foreach ($this->appointments as $appointment)
         <livewire:appointments.card :appointment="$appointment" :key="$appointment->id" />
     @endforeach
+
+    {{ $this->appointments->links() }}
 </section>
