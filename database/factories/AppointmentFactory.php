@@ -3,7 +3,6 @@
 namespace Database\Factories;
 
 use App\Enums\AppointmentStatus;
-use App\Enums\Role;
 use App\Models\Appointment;
 use App\Models\Service;
 use App\Models\User;
@@ -21,11 +20,11 @@ class AppointmentFactory extends Factory
      */
     public function definition(): array
     {
-        $barber = User::factory()->create()->assignRole(Role::Barber);
+        $barber = User::factory()->barber();
 
         return [
-            'barber_id' => $barber->id,
-            'customer_id' => User::factory()->create()->assignRole(Role::Customer),
+            'barber_id' => $barber,
+            'customer_id' => User::factory()->customer(),
             'service_id' => Service::factory()->hasAttached($barber, relationship: 'barbers'),
             'date' => fake()->dateTimeBetween('+1 days', '+14 days'),
             'status' => AppointmentStatus::Confirmed,

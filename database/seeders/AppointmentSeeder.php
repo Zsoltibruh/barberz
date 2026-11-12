@@ -19,25 +19,29 @@ class AppointmentSeeder extends Seeder
         $barbers = User::role(Role::Barber)->get();
         $services = Service::all();
 
+        // Appointments for the test barber
         Appointment::factory(5)
             ->state([
                 'barber_id' => User::find(1)->id,
+                'customer_id' => $customers->random()->id,
             ])
-            ->recycle($customers)
             ->recycle($services)
             ->create();
 
+        // Appointments for the test customer
         Appointment::factory(5)
             ->state([
+                'barber_id' => $barbers->random()->id,
                 'customer_id' => User::find(3)->id,
             ])
-            ->recycle($barbers)
             ->recycle($services)
             ->create();
 
         Appointment::factory(10)
-            ->recycle($customers)
-            ->recycle($barbers)
+            ->state([
+                'barber_id' => $barbers->random()->id,
+                'customer_id' => $customers->random()->id,
+            ])
             ->recycle($services)
             ->create();
     }
