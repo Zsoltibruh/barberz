@@ -28,6 +28,7 @@ new class extends Component {
     public function barbers()
     {
         return User::role(Role::Barber)
+            ->with('barberServices')
             ->when($this->search, function ($query) {
                 $ids = User::search($this->search)->keys();
                 $query->whereIn('id', $ids);
