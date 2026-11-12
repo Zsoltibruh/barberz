@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Enums\Role;
-use App\Models\Service;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
@@ -31,8 +30,6 @@ class UserSeeder extends Seeder
             'last_name' => 'Teszt',
             'email' => 'test@example.com',
         ])->assignRole(Role::Customer);
-
-        $services = Service::all();
 
         User::factory(4)
             ->create()
