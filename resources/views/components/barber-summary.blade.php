@@ -9,7 +9,12 @@
     <flux:card.footer>
         <flux:card.heading level="3" size="lg">{{ $barber->name }}</flux:card.heading>
         <flux:card.subheading> {{ $barber->status->label() }} </flux:card.subheading>
-        <flux:card.subheading> {{ __('Services') }}: haircuts, beard trimming </flux:card.subheading>
+        <flux:card.subheading>
+            {{ __('Services') }}:
+            @foreach ($barber->barberServices as $service)
+                {{ $service->name }}
+            @endforeach
+        </flux:card.subheading>
         <flux:card.actions>
             <flux:button variant="primary" color="blue" :href="route('appointments.create', ['barber' => $barber])"
                 wire:navigate>
