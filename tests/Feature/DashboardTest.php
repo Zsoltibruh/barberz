@@ -13,8 +13,24 @@ test('guests are redirected to the login page', function () {
     $response->assertRedirect(route('login'));
 });
 
-test('authenticated users can visit the dashboard', function () {
+test('customers users can\'t visit the dashboard', function () {
     $user = User::factory()->create()->assignRole(Role::Customer);
+    $this->actingAs($user);
+
+    $response = $this->get(route('dashboard'));
+    $response->assertForbidden();
+});
+
+test('barbers users can\'t visit the dashboard', function () {
+    $user = User::factory()->create()->assignRole(Role::Barber);
+    $this->actingAs($user);
+
+    $response = $this->get(route('dashboard'));
+    $response->assertForbidden();
+});
+
+test('the owner users can visit the dashboard', function () {
+    $user = User::factory()->create()->assignRole(Role::Owner);
     $this->actingAs($user);
 
     $response = $this->get(route('dashboard'));

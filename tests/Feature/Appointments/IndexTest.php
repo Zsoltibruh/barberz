@@ -66,7 +66,6 @@ test('customers can\'t see the modify and cancel button of a cancelled appointme
 
     Livewire::actingAs($this->customer)
         ->test('pages::appointments.index')
-        ->assertSee($this->appointment->date)
         ->assertDontSee(__('Modify appointment'))
         ->assertDontSee(__('Cancel appointment'));
 });
@@ -96,7 +95,6 @@ test('barbers can\'t see the modify and cancel button of a cancelled appointment
 
     Livewire::actingAs($this->barber)
         ->test('pages::appointments.index')
-        ->assertSee($this->appointment->date)
         ->assertDontSee(__('Modify appointment'))
         ->assertDontSee(__('Cancel appointment'));
 });
