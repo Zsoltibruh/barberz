@@ -4,7 +4,9 @@
     <flux:heading size="lg"> {{ $appointment->date }} </flux:heading>
 
     <flux:card.body>
-        <flux:card.heading> {{ $appointment->barber->name }} </flux:card.heading>
+        <flux:card.heading>
+            {{ $appointment->otherName(auth()->user())->name }}
+        </flux:card.heading>
         <flux:card.subheading>
             {{ $appointment->service->name }} - {{ $appointment->service->price }} Ft
         </flux:card.subheading>

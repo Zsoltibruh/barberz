@@ -30,6 +30,13 @@ class Appointment extends Model
         ];
     }
 
+    public function otherName(User $user): ?User
+    {
+        return $user->id === $this->barber_id
+        ? $this->customer
+        : $this->barber;
+    }
+
     /**
      * @return BelongsTo<User, $this>
      */
