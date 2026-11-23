@@ -15,10 +15,12 @@
 
         <flux:sidebar.nav>
             <flux:sidebar.group :heading="__('Platform')" class="grid">
-                <flux:sidebar.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')"
-                    wire:navigate>
-                    {{ __('Dashboard') }}
-                </flux:sidebar.item>
+                @can('manage barbershop')
+                    <flux:sidebar.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')"
+                        wire:navigate>
+                        {{ __('Dashboard') }}
+                    </flux:sidebar.item>
+                @endcan
                 <flux:sidebar.item icon="scissors" :href="route('barbers.index')"
                     :current="request()->routeIs('barbers.index')" wire:navigate>
                     {{ __('Barbers') }}

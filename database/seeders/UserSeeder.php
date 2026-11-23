@@ -31,6 +31,12 @@ class UserSeeder extends Seeder
             'email' => 'test@example.com',
         ])->assignRole(Role::Customer);
 
+        User::factory()->create([
+            'first_name' => 'Tamás',
+            'last_name' => 'Tulaj',
+            'email' => 'owner@example.com',
+        ])->assignRole(Role::Owner);
+
         User::factory(4)
             ->create()
             ->each(function ($user) {
