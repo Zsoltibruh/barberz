@@ -1,12 +1,13 @@
 <?php
 
 use App\Models\OpeningHour;
+use Illuminate\Support\Collection;
 use Livewire\Attributes\Computed;
 use Livewire\Component;
 
 new class extends Component {
     #[Computed]
-    public function openingHours()
+    public function openingHours(): Collection
     {
         return OpeningHour::orderBy('id')->get();
     }
