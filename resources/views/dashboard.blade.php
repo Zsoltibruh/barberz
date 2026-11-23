@@ -4,11 +4,9 @@
             <flux:button variant="primary" color="blue" :href="route('opening-hours.index')" wire:navigate>
                 {{ __('Manage opening hours') }}
             </flux:button>
-            <div
-                class="relative aspect-video overflow-hidden rounded-xl border border-neutral-200 dark:border-neutral-700">
-                <x-placeholder-pattern
-                    class="absolute inset-0 size-full stroke-gray-900/20 dark:stroke-neutral-100/20" />
-            </div>
+            <flux:button variant="primary" color="blue" :href="route('services.manage')" wire:navigate>
+                {{ __('Manage services') }}
+            </flux:button>
             <div
                 class="relative aspect-video overflow-hidden rounded-xl border border-neutral-200 dark:border-neutral-700">
                 <x-placeholder-pattern

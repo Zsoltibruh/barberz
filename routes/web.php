@@ -10,6 +10,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
         Route::livewire('opening-hours', 'pages::opening-hours.index')
             ->name('opening-hours.index');
+        Route::livewire('services', 'pages::services.manage')
+            ->name('services.manage');
     });
 
     Route::livewire('appointments', 'pages::appointments.index')->name('appointments.index');
