@@ -7,15 +7,15 @@ Route::view('/', 'welcome')->name('home');
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::middleware('can:manage barbershop')->group(function () {
         Route::view('dashboard', 'dashboard')->name('dashboard');
+
+        Route::livewire('opening-hours', 'pages::opening-hours.index')
+            ->name('opening-hours.index');
     });
 
     Route::livewire('appointments', 'pages::appointments.index')->name('appointments.index');
 
     Route::livewire('barbers', 'pages::barbers.index')->name('barbers.index');
     Route::livewire('barbers/{barber}/book', 'pages::appointments.create')->name('appointments.create');
-
-    Route::livewire('opening-hours', 'pages::opening-hours.index')
-        ->name('opening-hours.index');
 });
 
 require __DIR__.'/settings.php';
