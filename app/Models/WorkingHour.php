@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-#[Fillable(['weekday', 'start_time', 'end_time'])]
+#[Fillable(['barber_id', 'weekday', 'start_time', 'end_time'])]
 #[WithoutTimestamps]
 class WorkingHour extends Model
 {

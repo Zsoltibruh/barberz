@@ -16,6 +16,9 @@ class BarberForm extends Form
 
     public string $phone = '';
 
+    /**
+     * @return array<string, mixed>
+     */
     public function rules(): array
     {
         return [

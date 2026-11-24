@@ -29,6 +29,12 @@
                     :current="request()->routeIs('appointments.index')" wire:navigate>
                     {{ __('Appointments') }}
                 </flux:sidebar.item>
+                @can('set working hours')
+                    <flux:sidebar.item icon="calendar" :href="route('working-hours.index')"
+                        :current="request()->routeIs('working-hours.index')" wire:navigate>
+                        {{ __('Working hours') }}
+                    </flux:sidebar.item>
+                @endcan
             </flux:sidebar.group>
         </flux:sidebar.nav>
 
