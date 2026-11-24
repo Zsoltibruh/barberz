@@ -15,12 +15,11 @@ new class extends Component {
 ?>
 
 <section>
-    <div class="relative mb-6 w-full">
-        <flux:heading level="1" size="2xl">
-            {{ __('Opening hours') }}
-        </flux:heading>
-        <flux:separator variant="subtle" />
-    </div>
+    @include('partials.general-heading', [
+        'heading' => 'Opening hours',
+        'subheading' =>
+            'Here you can manage when the barbershop opens and closes on each day, barbers can\'t create working hours outside these hours',
+    ])
 
     <flux:table>
         <flux:table.columns>

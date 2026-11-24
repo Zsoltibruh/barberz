@@ -27,15 +27,11 @@ new class extends Component {
 ?>
 
 <section>
-    <div class="relative mb-6 w-full">
-        <flux:heading level="1" size="2xl">
-            {{ __('Services') }}
-        </flux:heading>
-        <flux:subheading size="lg" class="mb-6">
-            {{ __('The duration column shows an estimate and the price column shows your set minimum price.') }}
-        </flux:subheading>
-        <flux:separator variant="subtle" />
-    </div>
+    @include('partials.general-heading', [
+        'heading' => 'Manage services',
+        'subheading' =>
+            'Here you can manage what services your barbers can offer and add new ones. The duration is your estimate and the price is the minimum value the barbers must offer each service. If a barber doesn\'t choose an estimate or a price these values will be applied',
+    ])
 
     <flux:modal.trigger name="create">
         <flux:button variant="primary" color="green">

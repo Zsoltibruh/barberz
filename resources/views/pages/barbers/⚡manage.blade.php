@@ -29,15 +29,10 @@ new class extends Component {
 ?>
 
 <section>
-    <div class="relative mb-6 w-full">
-        <flux:heading level="1" size="2xl">
-            {{ __('Barbers') }}
-        </flux:heading>
-        <flux:subheading size="lg" class="mb-6">
-            {{ __('Some description...') }}
-        </flux:subheading>
-        <flux:separator variant="subtle" />
-    </div>
+    @include('partials.general-heading', [
+        'heading' => 'Manage barbers',
+        'subheading' => 'Here you can manage your employed barbers and hire new ones',
+    ])
 
     <flux:modal.trigger name="create">
         <flux:button variant="primary" color="green">

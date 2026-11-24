@@ -51,12 +51,10 @@ new class extends Component {
 ?>
 
 <section class="flex flex-col gap-2">
-    <div class="relative mb-6 w-full">
-        <flux:heading level="1" size="2xl">
-            {{ __('Barbers') }}
-        </flux:heading>
-        <flux:separator variant="subtle" />
-    </div>
+    @include('partials.general-heading', [
+        'heading' => 'Barbers',
+        'subheading' => 'Browse our barbers and filter for services',
+    ])
 
     <x:search target="barbers">
         <flux:select wire:model.live="service" :placeholder="__('Choose service...')">

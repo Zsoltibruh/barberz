@@ -35,7 +35,10 @@ new class extends Component {
 ?>
 
 <section>
-    <h1 class="text-3xl font-bold"> {{ __('Book appointment') }} - {{ $this->barber->name }} </h1>
+    @include('partials.general-heading', [
+        'heading' => 'Book appointment',
+        'subheading' => $this->barber->name,
+    ])
     <h2 class="text-2xl"> {{ __('Working hours') }} </h2>
     <div>
         <ul>
