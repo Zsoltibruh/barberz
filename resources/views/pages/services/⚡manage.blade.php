@@ -53,7 +53,7 @@ new class extends Component {
         </flux:table.columns>
         <flux:table.rows>
             @foreach ($this->services as $service)
-                <livewire:service.row :service="$service" :key="$service->id" />
+                <livewire:services.row :service="$service" :key="$service->id" />
             @endforeach
         </flux:table.rows>
     </flux:table>

@@ -12,6 +12,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
             ->name('opening-hours.index');
         Route::livewire('services', 'pages::services.manage')
             ->name('services.manage');
+        Route::livewire('barbers/manage', 'pages::barbers.manage')
+            ->name('barbers.manage');
     });
 
     Route::livewire('appointments', 'pages::appointments.index')->name('appointments.index');
