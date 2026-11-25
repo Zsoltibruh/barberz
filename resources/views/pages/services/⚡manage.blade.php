@@ -54,25 +54,5 @@ new class extends Component {
         </flux:table.rows>
     </flux:table>
 
-    <flux:modal name="create" class="md:w-4xl">
-        <form wire:submit="create" class="space-y-6">
-            <flux:heading size="lg">
-                {{ __('Add new service') }}
-            </flux:heading>
-
-            <flux:input wire:model="form.name" type="input" :label="__('Name')" />
-
-            <flux:input wire:model="form.durationMinutes" type="number" :label="__('Duration (minutes)')" />
-
-            <flux:input wire:model="form.price" type="number" :label="__('Price')" />
-            <flux:input wire:model="form.currency" disabled variant="filled" :label="__('Currency')" />
-
-            <div class="flex justify-end gap-2">
-                <flux:modal.close>
-                    <flux:button>{{ __('Cancel') }}</flux:button>
-                </flux:modal.close>
-                <flux:button type="submit" variant="primary">{{ __('Save') }}</flux:button>
-            </div>
-        </form>
-    </flux:modal>
+    <x-services.create-modal />
 </section>

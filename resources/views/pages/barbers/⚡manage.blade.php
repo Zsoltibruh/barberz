@@ -58,24 +58,5 @@ new class extends Component {
         </flux:table.rows>
     </flux:table>
 
-    <flux:modal name="create" class="md:w-4xl">
-        <form wire:submit="create" class="space-y-6">
-            <flux:heading size="lg">
-                {{ __('Hire new barber') }}
-            </flux:heading>
-
-            <flux:input wire:model="form.firstName" :label="__('First name')" />
-            <flux:input wire:model="form.lastName" :label="__('Last name')" />
-
-            <flux:input wire:model="form.email" type="email" :label="__('Email')" />
-            <flux:input wire:model="form.phone" :label="__('Phone')" />
-
-            <div class="flex justify-end gap-2">
-                <flux:modal.close>
-                    <flux:button>{{ __('Cancel') }}</flux:button>
-                </flux:modal.close>
-                <flux:button type="submit" variant="primary">{{ __('Save') }}</flux:button>
-            </div>
-        </form>
-    </flux:modal>
+    <x-barbers.create-modal />
 </section>

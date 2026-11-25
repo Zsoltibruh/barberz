@@ -2,7 +2,6 @@
 
 use App\Livewire\Forms\ModifyOpeningHourForm;
 use App\Models\OpeningHour;
-use Flux\Flux;
 use Livewire\Component;
 
 new class extends Component {
@@ -18,7 +17,7 @@ new class extends Component {
     {
         $this->form->modify();
 
-        Flux::modal("modify-{$this->openingHour->id}")->close();
+        $this->modal("modify-{$this->openingHour->id}")->close();
     }
 };
 ?>
@@ -51,25 +50,6 @@ new class extends Component {
             </flux:button>
         </flux:modal.trigger>
 
-        <flux:modal name="modify-{{ $this->openingHour->id }}" class="md:w-96">
-            <form wire:submit="modify" class="space-y-6">
-                <flux:heading size="lg">
-                    {{ __($this->openingHour->weekday) }}
-                </flux:heading>
-
-                <flux:input wire:model="form.opening" type="time" :label="__('Opening')" />
-
-                <flux:input wire:model="form.closing" type="time" :label="__('Closing')" />
-
-                <flux:switch wire:model="form.closed" type="bool" :label="__('Closed')" />
-
-                <div class="flex justify-end gap-2">
-                    <flux:modal.close>
-                        <flux:button>{{ __('Cancel') }}</flux:button>
-                    </flux:modal.close>
-                    <flux:button type="submit" variant="primary">{{ __('Save') }}</flux:button>
-                </div>
-            </form>
-        </flux:modal>
+        <x-opening-hours.modify-modal :openingHour="$this->openingHour" />
     </flux:table.cell>
 </flux:table.row>
