@@ -2,7 +2,6 @@
 
 use App\Livewire\Forms\WorkingHourForm;
 use App\Models\WorkingHour;
-use Flux\Flux;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\Computed;
@@ -23,7 +22,7 @@ new class extends Component {
     public function create(): void
     {
         $this->form->create();
-        Flux::modal('create')->close();
+        $this->modal('create')->close();
     }
 };
 ?>
@@ -64,11 +63,11 @@ new class extends Component {
             </flux:heading>
 
             <flux:select wire:model="form.weekday" :placeholder="__('Weekday')">
-                <flux:select.option> {{ __('monday') }} </flux:select.option>
-                <flux:select.option> {{ __('tuesday') }} </flux:select.option>
-                <flux:select.option> {{ __('wednesday') }} </flux:select.option>
-                <flux:select.option> {{ __('thursday') }} </flux:select.option>
-                <flux:select.option> {{ __('friday') }} </flux:select.option>
+                <flux:select.option value="monday"> {{ __('monday') }} </flux:select.option>
+                <flux:select.option value="tuesday"> {{ __('tuesday') }} </flux:select.option>
+                <flux:select.option value="wednesday"> {{ __('wednesday') }} </flux:select.option>
+                <flux:select.option value="thursday"> {{ __('thursday') }} </flux:select.option>
+                <flux:select.option value="friday"> {{ __('friday') }} </flux:select.option>
             </flux:select>
 
             <flux:input wire:model="form.start" type="time" :label="__('Start')" />
