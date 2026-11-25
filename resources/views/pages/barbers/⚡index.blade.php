@@ -67,7 +67,7 @@ new class extends Component {
 
     <div class="w-full flex flex-wrap gap-4">
         @foreach ($this->barbers as $barber)
-            <x:barber-summary :barber="$barber" />
+            <x:barbers.summary :barber="$barber" />
         @endforeach
     </div>
 

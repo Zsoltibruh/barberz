@@ -36,7 +36,7 @@ new class extends Component {
 ?>
 
 <div>
-    <x-appointment-summary :appointment="$appointment" :wire:key="$appointment->id">
+    <x-appointments.summary :appointment="$appointment" :wire:key="$appointment->id">
         @can('reschedule', $appointment)
             <flux:modal.trigger name="reschedule-appointment-{{ $appointment->id }}">
                 <flux:button variant="primary" color="yellow"> {{ __('Modify appointment') }} </flux:button>
@@ -47,7 +47,7 @@ new class extends Component {
                 <flux:button variant="danger"> {{ __('Cancel appointment') }} </flux:button>
             </flux:modal.trigger>
         @endcan
-    </x-appointment-summary>
+    </x-appointments.summary>
 
     @can('cancel', $appointment)
         <flux:modal name="cancel-appointment-{{ $appointment->id }}" class="md:w-96">
@@ -88,7 +88,10 @@ new class extends Component {
             </div>
         </flux:modal>
     @endcan
-
+    {{-- TODO: Separate modals into their own folders (in this case appointments/) also create template components for those modals, so it's easier to change.
+        For the confirm modals use a singulare "confirm-modal" component, since beside the 
+        heading and button texts everything is the same (maybe use slots so the modal can show a 
+        summary for each model) --}}
     @can('reschedule', $appointment)
         <flux:modal name="reschedule-appointment-{{ $appointment->id }}" class="md:w-96">
             <form wire:submit="reschedule" class="space-y-6">
