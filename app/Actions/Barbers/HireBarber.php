@@ -9,6 +9,9 @@ use Illuminate\Support\Str;
 
 class HireBarber
 {
+    /**
+     * @param  array<string, string>  $data
+     */
     public function handle(array $data): User
     {
         $user = User::create([
